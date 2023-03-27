@@ -50,25 +50,35 @@
 			}]
 		}],
 		width: "100%",
-		height: "100%",
-		autostart: true,
-		cast: {}
-    });
-    
-	jwplayer_hls_provider.attach();
-		p2pml.hlsjs.initJwPlayer(player, {
-			liveSyncDurationCount: 7,
-			loader: engine.createLoaderClass(),
-		});
-    if (getLang == "") {
-			lang = 1;
-		}
-		jwplayer().on('play', function(e) {
-		  jwplayer().setCurrentAudioTrack(lang);
-		});
-	} else {
-		document.write("Unsupported browser. Try Google Chrome");
-	}
-	</script>
+        height: "100%",
+        autostart: true,
+        cast: {}
+      });
+      
+      jwplayer_hls_provider.attach();
+      p2pml.hlsjs.initJwPlayer(player, {
+        liveSyncDurationCount: 7,
+        loader: engine.createLoaderClass(),
+      });
+  
+      if (getLang === "") {
+        var lang = 1;
+      } else {
+        var lang = parseInt(getLang);
+      }
+  
+      jwplayer().on('play', function(e) {
+        jwplayer().setCurrentAudioTrack(lang);
+      });
+    } else {
+      var errorMsg = "Unsupported browser. Try Google Chrome";
+      var errorContainer = document.createElement("div");
+      errorContainer.style.color = "red";
+      errorContainer.style.fontSize = "18px";
+      errorContainer.textContent = errorMsg;
+      document.body.appendChild(errorContainer);
+    }
+  })();
+</script>
 
 </body></html>
