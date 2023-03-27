@@ -43,7 +43,13 @@
 		height: "100%",
 		autostart: true,
 		cast: {}
-	});
+    });
+    if (getLang == "") {
+			lang = 1;
+		}
+		jwplayer().on('play', function(e) {
+		  jwplayer().setCurrentAudioTrack(lang);
+		}); 
 	jwplayer_hls_provider.attach();
 		p2pml.hlsjs.initJwPlayer(player, {
 			liveSyncDurationCount: 7,
