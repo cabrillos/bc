@@ -44,16 +44,17 @@
 		autostart: true,
 		cast: {}
     });
+    
+	jwplayer_hls_provider.attach();
+		p2pml.hlsjs.initJwPlayer(player, {
+			liveSyncDurationCount: 7,
+			loader: engine.createLoaderClass(),
+		});
     if (getLang == "") {
 			lang = 1;
 		}
 		jwplayer().on('play', function(e) {
 		  jwplayer().setCurrentAudioTrack(lang);
-		}); 
-	jwplayer_hls_provider.attach();
-		p2pml.hlsjs.initJwPlayer(player, {
-			liveSyncDurationCount: 7,
-			loader: engine.createLoaderClass(),
 		});
 	} else {
 		document.write("Unsupported browser. Try Google Chrome");
