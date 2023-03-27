@@ -10,6 +10,13 @@
    </head>
    <body bgcolor="black" style="margin:0; overflow:hidden">
       <script type="text/javascript" src="" async data-cfasync="false"></script>      <script disable-devtool-auto src=""></script>      <script src="../js/keys.js"></script>
+      <script>
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    }
+    var getURL = getParameterByName('get');
+    var getLang = getParameterByName('lang');
+  </script>
       <script src="//ssl.p.jwpcdn.com/player/v/8.26.8/jwplayer.js"></script>
       <script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo"</script>
       <script src="//cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/p2p-media-loader-core.min.js"></script>
@@ -44,17 +51,17 @@
 		autostart: true,
 		cast: {}
     });
-    
-	jwplayer_hls_provider.attach();
-		p2pml.hlsjs.initJwPlayer(player, {
-			liveSyncDurationCount: 7,
-			loader: engine.createLoaderClass(),
-		});
     if (getLang == "") {
 			lang = 1;
 		}
 		jwplayer().on('play', function(e) {
 		  jwplayer().setCurrentAudioTrack(lang);
+		});
+    
+	jwplayer_hls_provider.attach();
+		p2pml.hlsjs.initJwPlayer(player, {
+			liveSyncDurationCount: 7,
+			loader: engine.createLoaderClass(),
 		});
 	</script>
 
