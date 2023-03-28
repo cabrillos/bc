@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Mostrar Programación</title>
+  <meta charset="utf-8">
+ </head>
+ <body>
+  <div id="channel-logos">
+   <img class="channel-logo" src="https://cdn.mitvstatic.com/channels/canal-9-s.jpg" alt="Canal 9" data-channel="canal-9" onmouseover="mostrarProgramacion(this)" onmouseout="ocultarProgramacion()">
+  </div>
+  <div id="programacion" style="display: none; position: absolute; background-color: white; color: black; padding: 10px;">
+    Cargando programación...
+  </div>
+  <script type="text/javascript">
+   function mostrarProgramacion(img) {
+    var channel = img.getAttribute('data-channel');
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+      // Convierte la respuesta en un objeto Document
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(this.responseText, 'text/html');
+      // Busca el elemento que contiene la programación del canal y asigna su contenido al elemento #programacion
+      var programacion = doc.querySelector('.programacion-canal .programacion-content').innerHTML;
+      document.querySelector('#programacion').innerHTML = programacion;
+      document.querySelector('#programacion').style.display = 'block';
+     }
+    };
+    xhr.open('GET', 'https://mi.tv/ar/programacion/' + channel, true);
+    xhr.send();
+   }
+   function ocultarProgramacion() {
+    document.querySelector('#programacion').style.display = 'none';
+   }
+  </script>
+ </body>
+</html>
